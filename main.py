@@ -5,8 +5,30 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def index():
-    return jsonify({"Choo Choo": "Welcome to your Flask app 🚅"})
+def home():
+    return 'Hello, World!'
+
+@app.route('/about')
+def about():
+    print("About Page")
+    return 'About'
+
+
+@app.route('/data',  methods=['POST', 'GET'])
+def run_files():
+    print('request.json', request.json)
+    if request.method == 'POST':
+        print('First')
+        value = request.json.get('sessID')
+        user=request.json.get('userID')
+        print('sessID',value)
+        print('userID', user)
+
+        # main(value, user)
+
+        return "Added"
+    else:
+        return "In get request"
 
 
 if __name__ == '__main__':
