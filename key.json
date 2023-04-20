@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "vr-trainingdb",
+    "private_key_id": "6112be189a7e5d2516b979cd4aa1bec358d7e1c4",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEugIBADANBgkqhkiG9w0BAQEFAASCBKQwggSgAgEAAoIBAQDAv14+LsFyyzmK\npbyDJd3X3XqX02dVw+utg1nkrPf4IDWCh4fVWhQCJNTUO5WdGEBLBLcuc1U12Owl\nfGhEVH0tcxsciu43dE3aQB98oABGfZWU9VL2En30amcnaU2tasuqIWPGhXAZ5Qcu\ny0jnEd3E1jhqnIU8ov4Jr9D1CG1ovRdzewx5ogW0y23v82kH7BaoHW1GMnZTfmAk\n2jejIylL1IvZ1x0xQKz81K0zk681KulSJTzFYn94VR8Ji8d3gI5TRy7DkM4aK7Qq\nr6QJsjGlCyQ3K4C6EKoILDfZr4PRu3Kh9k4JYbTG2N/W1I46AGat55/q8TsGM80W\n0LKt6vv9AgMBAAECgf8m8Ev1lUxSOOA53QVlkVvogmNo/V5hXpyYcRfiI7gMwslX\n6akI1GkMNgQ+dYjZNruuQe5HT+RNYvTEbbr9D95MFwb8tyaD9VtkneQAytCUvle7\n8DoLjk1rT2rw36Z9UCr8CZijEvqtvAN7OmL7co578C5sgmuVdAbPJ2RUpryOwEEx\nUYP9PE30GWV/J0Et3qlaSyleXO3x5mzhu7LVAohuVnniyG1TSgoy9gQu1Fk8tEVL\njyWUYXXTGq0zCHMzHTUk/BqWv06UKlRxrHOPFuaDeaBDiRNVcJJUc43xkEW2lL5Y\nCi01HmlABE2AlisS8eI0kE5heAzsV000j3pKdJECgYEA+lfwzbirITZilnhTxP4Q\nQKSFqUplPS/XCWzQ55cpJ/9r/qONA1cqBxROXJ9HfVkFT/Ms/InkBFPDOba8u9Hn\nG8x8Rb1FHMLw6SfONBilxiOXv4oTZ0AJD9c6w7fyRzKGlX49Ul38GhV3x2XQ+sfV\nHNrSlWY3DQNWoyMwHC9hqrcCgYEAxRpGkJCjcbV7M0P8IC39PGVbrw+CQWYC6iSA\nCMPAs1pEf4a16rpqYyRT3Y1QyPDKvkuL19RPwQ5xIgP/t+sTloRThc58ixjaDS19\nu5obCLl6KAG5puCms8pHKlCdxPojWHHXBKMBO1ePN9KjmvMQpuW3UESAQZ3tSeWi\nkIiI6usCgYBDLx6c1xZ2D1Zd82Tn1Rcfgges6x5IUXJwQRe/Tz3oUg/1gobxgo7w\n3244RTa2WRGn5ycHjyn2T1RxRK1Z6ncPas1fGfBWS6rDp78bFBJJHnw3FyMl7nWA\nHs7Sf6cxnEmqDPsAA+EITwKaLKTs6Hw1BjTFi2zyvRafKW5b4gtf+QKBgD7vWuTC\nKk4ego4mARVNWfS08Id/TjoPlpKowPELgDZEdma53tBqYZnyeYzemJLwv+vvN2Hc\n+vJL6DfSSw6w0vpWmky5V+8aKlXW1rTWSheJEcZAdsUgKlpyFjMetqG0tSCCiQOE\nANqv5J0Qdwj8365K3zOUC9fn02KrHjNERWOtAoGAcqRXCD1HEt0fnSAZERg8WA8n\n9nHTLsbkCQyXKxwHqcFpJjfulPBqWzhxFKwKR4/R2+4ZO/O95tT5wXhYELB2nL3J\nm2fNu7csJp7L1IpqRlY26KND7gq2bjD/ibxSET0NayudXwEJalkTBGxwNk6ydXlS\ny+AC6lLV264Jcm+B4LQ=\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-a2xmt@vr-trainingdb.iam.gserviceaccount.com",
+    "client_id": "112531488163594578259",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-a2xmt%40vr-trainingdb.iam.gserviceaccount.com"
+  }
+  

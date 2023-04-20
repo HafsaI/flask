@@ -1,7 +1,7 @@
 from flask import Flask, jsonify,  request
 import os
 from flask_cors import CORS
-# from speech_scores import main
+from speech_scores import main
 
 app = Flask(__name__)
 CORS(app)
@@ -27,7 +27,7 @@ def run_files():
         print('sessID',value)
         print('userID', user)
 
-        # main(value, user)
+        main(value, user)
 
         return "Added"
     else:
