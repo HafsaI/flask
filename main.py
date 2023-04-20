@@ -1,7 +1,10 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify,  request
 import os
+from flask_cors import CORS
+# from speech_scores import main
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/')
