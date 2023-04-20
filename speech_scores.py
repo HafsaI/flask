@@ -6,7 +6,8 @@ import requests
 import scipy
 from scipy.stats import binom
 import numpy as np
-
+import syllables
+import whisper
 
 cred = credentials.Certificate('key.json') 
 default_app = firebase_admin.initialize_app(cred)
@@ -117,11 +118,65 @@ def analysis_pauses(pauses): # 21.92 pauses per minute   or 21.92 in 60 seconds
     print("Pauses:" , pauses)
     return(pauses)
 
+def readabiity_ease(filename):
+    model = whisper.load_model("small.en")
+    result = model.transcribe(filename, language = "en", fp16 = False)
+    passage = result["text"]    
+    # passage = "Mike and Morris lived in the same village. While Morris owned the largest jewellery shop in the village, Mike was a poor farmer. Both had large families with many sons, daughters-in-law and grandchildren. One fine day, Mike, tired of not being able to feed his family, decided to leave the village and move to the city where he was certain to earn enough to feed everyone. There are usually five steps which are a part of the scientific method. The steps can occur in any order, but the first step is usually observation. An observation is the use of one or more of the five senses, which include seeing, hearing, feeling, smelling, and tasting. The five senses are used to learn about or identify an event or object the scientist wants to study."
+    # passage = "All living things need food and energy to survive. The food-making and energy process for plants to survive is called photosynthesis. Plants make food and produce oxygen through photosynthesis. The process is complex but with the sun, water, nutrients from the soil, oxygen, and chlorophyll, a plant makes its own food in order to survive."
+
+    sentences = passage.split('.')
+
+    total_sentences = 0
+    total_words = 0
+    total_syllables = 0
+    for i in sentences:
+        sentences[total_sentences] = sentences[total_sentences].split()
+        total_sentences = total_sentences + 1
+    for sentence in sentences:
+        for word in sentence:
+            if word != "" :  
+                total_words = total_words + 1
+    
+    for sentence in sentences:
+        for word in sentence:
+            if word != "" :
+                total_syllables = total_syllables + syllables.estimate(word)
+    re = 206.835 - 1.015*(total_words/total_sentences) - 84.6*(total_syllables/total_words)
+    print("working")
+    return(re)
+def check_grade(score):
+    if 90 < score <= 100:
+        print("Grade = 5th grade.")
+        print("Very easy to listen to.")
+    elif 80 < score <= 90:
+        print("Grade = 6th grade.")
+        print("Easy to listen to.")
+    elif 70 < score <= 80:
+        print("Grade = 7th grade.")
+        print("Fairly easy to listen.")
+    elif 50 < score <= 70:
+        print("Grade = 8th and 9th grade.")
+        print("Plain English.")
+    elif 50 < score <= 55:
+        print("Grade = 10th to 12th grade.")
+        print("Fairly difficult to listen to.")
+    elif 30 < score <= 50:
+        print("Grade = College")
+        print("Difficult to listen to.")
+    elif 10 < score <= 30:
+        print("Grade = College Graduate")
+        print("Very difficult to listen.")
+    elif 0 < score <= 10:
+        print("Grade = Professional.")
+        print("Extremely difficult to listen.")
+    elif score <= 0:
+        print("Very Confusing.")
+    print("Listenability score:", round(score, 2))
+    return(round(score, 2))
+
 
 def main(value,user):
-
-    
-
     audiofile=""
     doc_ref = db.collection('training_sessions').document(value)
     doc = doc_ref.get()
@@ -142,7 +197,10 @@ def main(value,user):
     pauses = mysppaus(file_name, "")  #pauses
     pause = analysis_pauses(pauses)
     pronunciation = mysppron(file_name,"")
-    print('Pronunciation Score: ', pronunciation) #pronunciation score (intonation & phenomic perfomance)
+    print('Pronunciation Score: ', pronunciation)
+    re = readabiity_ease(file_name)
+    print('read', re)
+    listenability = round(check_grade(re)/10, 2)
 
     
     doc = doc_ref.get()
@@ -151,7 +209,7 @@ def main(value,user):
         'pauses_score' :pauses,
         'pronunciation_score': pronunciation,
         'speakingrate_score' :speech_Rate , 
-        'listenability_score': 7,
+        'listenability_score': listenability,
         'user_id' : user,
     
     }, merge = True)
