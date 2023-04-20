@@ -7,6 +7,7 @@ import scipy
 from scipy.stats import binom
 import numpy as np
 import syllables
+import os
 import whisper
 
 cred = credentials.Certificate('key.json') 
@@ -15,14 +16,12 @@ db = firestore.client()
 
 
 def myspatc(m,p):
-    # sound="/api/"+m
+    # sound= p + "/"+m
     # print(sound)
-    file_n="myspsolution.praat"
-    print(file_n)
-    # path="/api/"
-    # print(path)
+    file_n= "./myspsolution.praat"   
+    audio_file = "./" + m
     try:
-        objects= run_file(file_n, -20, 2, 0.3, "yes",m,"", 80, 400, 0.01, capture_output=True)
+        objects= run_file(file_n, -20, 2, 0.3, "yes",audio_file,"./", 80, 400, 0.01, capture_output=True)
         print("objects", objects)
         z1=str( objects[1]) # This will print the info from the textgrid object, and objects[1] is a parselmouth.Data object with a TextGrid inside
         z2=z1.strip().split()
@@ -37,10 +36,10 @@ def myspatc(m,p):
 
 def myspsr(m,p):
     # sound=p+"/"+m+".wav"
-    file_n="myspsolution.praat"
-    print(file_n)
+    file_n= "./myspsolution.praat"   
+    audio_file = "./" + m
     try:
-        objects= run_file(file_n, -20, 2, 0.3, "yes",m,"", 80, 400, 0.01, capture_output=True)
+        objects= run_file(file_n, -20, 2, 0.3, "yes",audio_file,"./", 80, 400, 0.01, capture_output=True)
         # print (objects[0]) # This will print the info from the sound object, and objects[0] is a parselmouth.Sound object
         z1=str( objects[1]) # This will print the info from the textgrid object, and objects[1] is a parselmouth.Data object with a TextGrid inside
         z2=z1.strip().split()
@@ -58,10 +57,10 @@ def mysppaus(m,p):
     # sourcerun=p+"/myspsolution.praat"
     # path=p+"/"
     # file_n="myspsolution.praat"
-    file_n="myspsolution.praat"
-    print(file_n)
+    file_n= "./myspsolution.praat"   
+    audio_file = "./" + m
     try:
-        objects= run_file(file_n, -20, 2, 0.3, "yes",m,"", 80, 400, 0.01, capture_output=True)
+        objects= run_file(file_n, -20, 2, 0.3, "yes",audio_file,"./", 80, 400, 0.01, capture_output=True)
         # print (objects[0]) # This will print the info from the sound object, and objects[0] is a parselmouth.Sound object
         z1=str( objects[1]) # This will print the info from the textgrid object, and objects[1] is a parselmouth.Data object with a TextGrid inside
         z2=z1.strip().split()
@@ -75,9 +74,10 @@ def mysppaus(m,p):
     return z3; 
 
 def mysppron(m,p):
-    file_n="myspsolution.praat"
+    file_n= "./myspsolution.praat"   
+    audio_file = "./" + m
     try:
-        objects= run_file("myspsolution.praat", -20, 2, 0.3, "yes",m,"", 80, 400, 0.01, capture_output=True)
+        objects= run_file(file_n, -20, 2, 0.3, "yes",audio_file,"./", 80, 400, 0.01, capture_output=True)
         # print (objects[0]) # This will print the info from the sound object, and objects[0] is a parselmouth.Sound object
         z1=str( objects[1]) # This will print the info from the textgrid object, and objects[1] is a parselmouth.Data object with a TextGrid inside
         z2=z1.strip().split()
@@ -119,6 +119,8 @@ def analysis_pauses(pauses): # 21.92 pauses per minute   or 21.92 in 60 seconds
     return(pauses)
 
 def readabiity_ease(filename):
+    print('newfileame', filename)
+    filename = '/Users/laibairfan/flask/' + filename
     model = whisper.load_model("small.en")
     result = model.transcribe(filename, language = "en", fp16 = False)
     passage = result["text"]    
@@ -179,6 +181,9 @@ def check_grade(score):
 def main(value,user):
     audiofile=""
     doc_ref = db.collection('training_sessions').document(value)
+    cwd = os.getcwd()
+    path = cwd
+    print("path", path)
     doc = doc_ref.get()
     dictt = doc.to_dict()
     if ('session' in dictt):
@@ -190,7 +195,7 @@ def main(value,user):
     with open(file_name, 'wb') as f:
         f.write(response.content)
 
-    ar = myspatc(file_name, "") 
+    ar = myspatc(file_name, path) 
     clarity = analysis_ar(ar)
     sr = myspsr(file_name, "")    #speech rate
     speech_Rate = analysis_sr(sr)
@@ -201,6 +206,7 @@ def main(value,user):
     re = readabiity_ease(file_name)
     print('read', re)
     listenability = round(check_grade(re)/10, 2)
+    print('listenability', listenability)
 
     
     doc = doc_ref.get()
