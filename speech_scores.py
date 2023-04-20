@@ -120,7 +120,6 @@ def analysis_pauses(pauses): # 21.92 pauses per minute   or 21.92 in 60 seconds
 
 def readabiity_ease(filename):
     print('newfileame', filename)
-    filename = '/Users/laibairfan/flask/' + filename
     model = whisper.load_model("small.en")
     result = model.transcribe(filename, language = "en", fp16 = False)
     passage = result["text"]    
