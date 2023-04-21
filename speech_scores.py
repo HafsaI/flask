@@ -120,6 +120,7 @@ def analysis_pauses(pauses): # 21.92 pauses per minute   or 21.92 in 60 seconds
 
 def readabiity_ease(filename):
     print('newfileame', filename)
+    # filename = '/Users/laibairfan/flask/' + filename
     model = whisper.load_model("small.en")
     result = model.transcribe(filename, language = "en", fp16 = False)
     passage = result["text"]    
@@ -203,9 +204,9 @@ def main(value,user):
     pronunciation = mysppron(file_name,"")
     print('Pronunciation Score: ', pronunciation)
     re = readabiity_ease(file_name)
-    print('read', re)
-    listenability = round(check_grade(re)/10, 2)
-    print('listenability', listenability)
+    # print('read', re)
+    # listenability = round(check_grade(re)/10, 2)
+    # print('listenability', listenability)
 
     
     doc = doc_ref.get()
