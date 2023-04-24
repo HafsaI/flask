@@ -8,7 +8,7 @@ from scipy.stats import binom
 import numpy as np
 import syllables
 import os
-# import whisper
+import whisper
 
 cred = credentials.Certificate('key.json') 
 default_app = firebase_admin.initialize_app(cred)
@@ -203,10 +203,10 @@ def main(value,user):
     pause = analysis_pauses(pauses)
     pronunciation = mysppron(file_name,"")
     print('Pronunciation Score: ', pronunciation)
-    # re = readabiity_ease(file_name)
-    # print('read', re)
-    # listenability = round(check_grade(re)/10, 2)
-    # print('listenability', listenability)
+    re = readabiity_ease(file_name)
+    print('read', re)
+    listenability = round(check_grade(re)/10, 2)
+    print('listenability', listenability)
 
     
     doc = doc_ref.get()
@@ -215,7 +215,7 @@ def main(value,user):
         'pauses_score' :pauses,
         'pronunciation_score': pronunciation,
         'speakingrate_score' :speech_Rate , 
-        # 'listenability_score': listenability,
+        'listenability_score': listenability,
         'user_id' : user,
     
     }, merge = True)
