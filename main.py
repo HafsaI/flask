@@ -1,7 +1,7 @@
 from flask import Flask, jsonify,  request
 import os
 from flask_cors import CORS
-from speech_scores import main
+from speech_analysis import main
 
 app = Flask(__name__)
 CORS(app)
@@ -11,11 +11,6 @@ CORS(app)
 def home():
     return 'Hello, World!'
 
-@app.route('/about')
-def about():
-    print("About Page")
-    return 'About'
-
 
 @app.route('/data',  methods=['POST', 'GET'])
 def run_files():
@@ -24,13 +19,11 @@ def run_files():
     if request.method == 'POST':
         print('First')
         value = request.json.get('sessID')
-        user=request.json.get('userID')
-        print('sessID',value)
+        user = request.json.get('userID')
+        print('sessID', value)
         print('userID', user)
-        
 
         main(value, user)
-
         return "Added"
     else:
         return "In get request"
