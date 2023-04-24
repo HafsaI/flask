@@ -204,9 +204,9 @@ def main(value,user):
     pronunciation = mysppron(file_name,"")
     print('Pronunciation Score: ', pronunciation)
     re = readabiity_ease(file_name)
-    # print('read', re)
-    # listenability = round(check_grade(re)/10, 2)
-    # print('listenability', listenability)
+    print('read', re)
+    listenability = round(check_grade(re)/10, 2)
+    print('listenability', listenability)
 
     
     doc = doc_ref.get()
