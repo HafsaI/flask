@@ -160,7 +160,7 @@ def listenability(audio_filename):
     return(round(flesch_reading_ease, 1))
 
 
-def main(value, user):
+def main(value):
     audiofile = ""
     doc_ref = db.collection('training_sessions').document(value)
     # cwd = os.getcwd()
@@ -210,7 +210,6 @@ def main(value, user):
         'speakingrate_score': speechrate_score,
         'speakingrate_comment': speech_Rate_comments,
         # 'listenability_score': listenability_score,
-        'user_id': user,
 
     }, merge=True)
 

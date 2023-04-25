@@ -19,11 +19,11 @@ def run_files():
     if request.method == 'POST':
         print('First')
         value = request.json.get('sessID')
-        user = request.json.get('userID')
+        # user = request.json.get('userID')
         print('sessID', value)
-        print('userID', user)
+        # print('userID', user)
 
-        main(value, user)
+        main(value)
         return "Added"
     else:
         return "In get request"
