@@ -22,6 +22,7 @@ def clarityscore(m):
     try:
         objects = run_file(file_n, -20, 2, 0.3, "yes", audio_file,
                            "./", 80, 400, 0.01, capture_output=True)
+        print('objects', objects)
         # This will print the info from the textgrid object, and objects[1] is a parselmouth.Data object with a TextGrid inside
         z1 = str(objects[1])
         z2 = z1.strip().split()
@@ -160,9 +161,10 @@ def listenability(audio_filename):
     return(round(flesch_reading_ease, 1))
 
 
-def main(value):
+# for vr speech
+def main(sess_id):
     audiofile = ""
-    doc_ref = db.collection('training_sessions').document(value)
+    doc_ref = db.collection('training_sessions').document(sess_id)
     # cwd = os.getcwd()
     # path = cwd
     # print("path", path)
@@ -213,4 +215,29 @@ def main(value):
 
     }, merge=True)
 
-# main("id1", "RZFk7KafPfdpi0SZ0AO8mZ8TfeI2")
+# for individual speech
+
+
+def individual_analysis(file_name):
+    clarity_score = clarityscore(file_name)
+    clarity_comments = calibrate_clarity(clarity_score)
+    print("Clarity score is: ", clarity_score)
+    print("Comments: " + clarity_comments)
+
+    # Speech rate score
+    speechrate_score = speech_ratescore(file_name)
+    speech_Rate_comments = calibrate_speechrate(speechrate_score)
+    print("Speech rate score is: ", speechrate_score)
+    print("Comments: " + speech_Rate_comments)
+
+    # No of Pauses
+    pauses = no_of_pauses(file_name)
+    print("num of pauses: ", pauses)
+
+    # Pronounciation score
+    pronunciation_score = pronunciation(file_name)
+    print("Pronounciation score is: ", pronunciation_score)
+    data = {'clarity_score': clarity_score, 'clarity_comments': clarity_comments, 'speechrate_score': speechrate_score,
+            'speechrate_comments': speech_Rate_comments, 'pauses_score': pauses, 'pronunciation_score': pronunciation_score}
+
+    return data
