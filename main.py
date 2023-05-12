@@ -15,9 +15,9 @@ def home():
 
 @app.route('/sendaudio', methods=['POST', 'GET'])
 def run_speechpost():
-    # data = "fileuploaded"
-    # response = jsonify(data)
-    # response.headers.add('Access-Control-Allow-Origin', '*')
+    data = "fileuploaded"
+    response = jsonify(data)
+    response.headers.add('Access-Control-Allow-Origin', '*')
     if request.method == 'POST':
         audio_file = request.files['audFile']
         audio_file.save(global_speech_file)
@@ -28,9 +28,9 @@ def run_speechpost():
 
 @app.route('/getscores', methods=['GET'])
 def run_speechget():
-    # data = "Sent Scores"
-    # response = jsonify(data)
-    # response.headers.add('Access-Control-Allow-Origin', '*')
+    data = "Sent Scores"
+    response = jsonify(data)
+    response.headers.add('Access-Control-Allow-Origin', '*')
     return individual_analysis(global_speech_file)
 
 
