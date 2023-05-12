@@ -1,10 +1,11 @@
 from flask import Flask, jsonify,  request
 import os
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from speech_analysis import main, individual_analysis
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, support_credentials=True)
+# cors.init_app(app=app, supports_credentials=True)
 global_speech_file = 'indii_audio.wav'
 
 
@@ -18,6 +19,7 @@ def run_speechpost():
     data = "fileuploaded"
     response = jsonify(data)
     response.headers.add('Access-Control-Allow-Origin', '*')
+
     if request.method == 'POST':
         audio_file = request.files['audFile']
         audio_file.save(global_speech_file)
@@ -31,6 +33,7 @@ def run_speechget():
     data = "Sent Scores"
     response = jsonify(data)
     response.headers.add('Access-Control-Allow-Origin', '*')
+
     return individual_analysis(global_speech_file)
 
 
