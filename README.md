@@ -1,10 +1,3 @@
----
-title: Flask
-description: A popular minimal server framework for Python
-tags:
-  - python
-  - flask
----
 
 # About
 Python Backend with speech and body scripts. Get and Post Requests.
