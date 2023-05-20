@@ -6,18 +6,21 @@ tags:
   - flask
 ---
 
-# Python Flask Example
+# About
+Python Backend with speech and body scripts. Get and Post Requests.
 
-This is a [Flask](https://flask.palletsprojects.com/en/1.1.x/) app that serves a simple JSON response.
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/zUcpux)
-
-## ✨ Features
+## ✨ Technologies
 
 - Python
 - Flask
+- Whisper
+- Yolov7
 
 ## 💁‍♀️ How to use
+To run this project, clone the project locally:
 
-- Install Python requirements `pip install -r requirements.txt`
-- Start the server for development `python3 main.py`
+```
+$ pip install -r requirements.txt
+$ python3 main.py
+```
