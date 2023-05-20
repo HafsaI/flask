@@ -18,4 +18,4 @@ $ pip install -r requirements.txt
 $ python3 main.py
 ```
 
-https://fla[](url)sk-production-0341.up.railway.app
+https://flask-production-0341.up.railway.app
